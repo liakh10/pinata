@@ -171,7 +171,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   function size(){ fx.width = stage.clientWidth * devicePixelRatio; fx.height = stage.clientHeight * devicePixelRatio; g.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0); }
   size(); addEventListener('resize', size);
   var cols = ['#ff5fa8', '#ffd23f', '#3ddcff', '#ff8c3a', '#b6e83c', '#fbf5e6'];
-  function pinPoint(){ var r = document.getElementById('pin').getBoundingClientRect(), s = stage.getBoundingClientRect(); return { x: r.left - s.left + r.width / 2, y: r.top - s.top + r.height * .55 }; }
+  function pinPoint(){ var im = document.querySelector('#pin img.on') || document.querySelector('#pin img'), r = im.getBoundingClientRect(), s = stage.getBoundingClientRect(); return { x: r.left - s.left + r.width / 2, y: r.top - s.top + r.height * .55 }; }
   function confetti(n, big){ var p = pinPoint(); for(var i = 0; i < n; i++) parts.push({ t: 'c', x: p.x, y: p.y, vx: (Math.random() - .5) * (big ? 26 : 14), vy: -Math.random() * (big ? 18 : 10) - 2, g: .35, w: 5 + Math.random() * 7, h: 7 + Math.random() * 9, a: Math.random() * 6, va: (Math.random() - .5) * .4, c: cols[i % cols.length], life: 110 + Math.random() * 60 }); loop(); }
   function burst(){ var p = pinPoint(), W = stage.clientWidth, sz = Math.min(150, Math.max(84, W * .15)); memes.forEach(function(m, i){ var ang = -Math.PI / 2 + (i - 4.5) / 4.5 * 1.1; var sp = 13 + Math.random() * 7; parts.push({ t: 'm', img: imgs[m[0]], x: p.x, y: p.y, vx: Math.cos(ang) * sp + (Math.random() - .5) * 4, vy: Math.sin(ang) * sp - 4, g: .5, s: sz, a: 0, va: (Math.random() - .5) * .3, rest: 0 }); }); confetti(220, true); loop(); }
   function loop(){ if(raf) return; raf = requestAnimationFrame(step); }
