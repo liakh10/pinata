@@ -64,7 +64,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .cat img{width:100%;height:100%;object-fit:contain;object-position:50% 100%;position:absolute;left:0;bottom:0;opacity:0;transition:opacity .08s}
 .cat img.on{opacity:1}
-.cat img.hit{width:178%;height:auto;bottom:4%;object-fit:unset}
+.cat img.hit{max-width:none;width:178%;height:auto;bottom:4%;object-fit:unset}
 .cat.lunge{transform:translateX(7%) !important}
 .fx{position:absolute;inset:0;z-index:8;pointer-events:none}
 .mark{position:absolute;left:var(--pad);bottom:var(--pad);z-index:9;font-family:var(--disp);font-size:clamp(26px,4vw,54px);line-height:.95;color:var(--cream);-webkit-text-stroke:2px var(--ink);paint-order:stroke fill;text-shadow:5px 5px 0 var(--ink);pointer-events:none}
