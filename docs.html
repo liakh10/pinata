@@ -10,21 +10,21 @@
 <link rel="apple-touch-icon" href="assets/apple-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 <style>
-:root{--bg:#4b2fd8;--bg-d:#2e1a99;--ink:#120a2a;--cream:#fff6e8;--green:#22c55e;--pink:#ff3d8a;--yellow:#ffd23f;--line:rgba(255,246,232,.18);
-  --disp:"Anton",Impact,sans-serif;--type:"Inter",system-ui,sans-serif;--pad:clamp(16px,3vw,40px)}
+:root{--bg:#2a1a3a;--bg-d:#1f1330;--ink:#1f1a14;--cream:#fbf5e6;--green:#b6e83c;--pink:#ff5fa8;--yellow:#ff8c3a;--line:rgba(251,245,230,.18);
+  --disp:"Bungee",system-ui,sans-serif;--type:"Space Mono",ui-monospace,monospace;--pad:clamp(16px,3vw,40px)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:80px}
-body{background:var(--bg);color:var(--cream);font-family:var(--type);font-size:14.5px;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--cream);font-family:var(--type);font-size:13.5px;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
 img{display:block;max-width:100%}
-.top{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px var(--pad);background:rgba(75,47,216,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px var(--pad);background:rgba(42,26,58,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-size:16px;letter-spacing:.1em;text-transform:uppercase}
 .brand img{width:30px;height:30px;border-radius:50%;border:2px solid var(--ink)}
 .brand small{font-family:var(--type);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,246,232,.7);font-weight:500}
 .top nav{display:flex;gap:6px}
-.btn{height:36px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 15px;font-family:var(--disp);font-size:13px;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;background:var(--ink);color:var(--cream)}
+.btn{height:36px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 13px;font-family:var(--disp);font-size:11px;letter-spacing:.06em;background:var(--cream);color:var(--ink);border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}
 .btn svg{width:13px;height:13px}
 .btn.buy{background:var(--green);color:var(--ink)}
 .btn.crumb{background:var(--cream);color:var(--ink)}
@@ -33,19 +33,19 @@ img{display:block;max-width:100%}
 .kick{font-family:var(--disp);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px}
 .side a{font-size:13.5px;font-weight:500;padding:6px 12px;color:rgba(255,246,232,.7);border-radius:999px}
 .side a:hover{color:var(--cream)}
-.side a.on{color:var(--ink);background:var(--cream)}
+.side a.on{color:var(--ink);background:var(--cream);border:2px solid var(--ink)}
 .hero{margin-bottom:24px}
 .hero h1{font-family:var(--disp);font-size:clamp(34px,5.2vw,60px);line-height:.95;letter-spacing:.02em;text-transform:uppercase;text-shadow:4px 4px 0 var(--ink)}
 .hero h1 em{font-style:normal;color:var(--yellow)}
 .hero p{margin-top:12px;font-size:15px;font-weight:500;line-height:1.5;max-width:60ch;white-space:pre-line}
-.sec{background:var(--cream);color:var(--ink);padding:clamp(16px,2.6vw,26px);margin-bottom:16px;border-radius:20px;box-shadow:0 8px 0 var(--ink)}
+.sec{background:var(--cream);color:var(--ink);padding:clamp(16px,2.6vw,26px);margin-bottom:16px;border:2px solid var(--ink);box-shadow:6px 6px 0 var(--ink)}
 .sec h2{font-family:var(--disp);font-size:clamp(20px,2.4vw,28px);line-height:1.1;letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px}
-.sec h2 i{font-style:normal;font-family:var(--type);font-weight:600;font-size:10px;letter-spacing:.24em;color:#7c3aed;display:block;margin-bottom:6px}
+.sec h2 i{font-style:normal;font-family:var(--type);font-weight:600;font-size:10px;letter-spacing:.24em;color:#b8605c;display:block;margin-bottom:6px}
 .sec p{font-size:14.5px;line-height:1.6;max-width:68ch}
 .sec p + p{margin-top:8px}
 .rows{display:grid;margin-top:12px;border-top:2px solid var(--ink)}
 .row{display:grid;grid-template-columns:160px 1fr;gap:12px;padding:9px 0;border-bottom:1px solid #d8cfe8;font-size:13.5px;line-height:1.5}
-.row dt{font-family:var(--disp);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7c3aed;padding-top:4px}
+.row dt{font-family:var(--disp);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#b8605c;padding-top:4px}
 .tree{margin-top:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.6;white-space:pre;overflow-x:auto;padding:12px 14px;background:var(--ink);color:var(--cream);border-radius:12px}
 .tree b{color:var(--yellow);font-weight:600}
 .kbd{display:inline-block;font-family:var(--disp);font-size:11px;padding:2px 7px;border-radius:6px;background:var(--ink);color:var(--cream);margin:0 2px}
@@ -59,7 +59,7 @@ img{display:block;max-width:100%}
 .links{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
 .faq{display:grid;gap:8px;margin-top:10px}
 .faq div{padding:10px 14px;background:#efe9ff;border-radius:12px}
-.faq b{font-family:var(--disp);font-size:15px;letter-spacing:.04em;text-transform:uppercase;display:block;margin-bottom:3px;color:#7c3aed}
+.faq b{font-family:var(--disp);font-size:15px;letter-spacing:.04em;text-transform:uppercase;display:block;margin-bottom:3px;color:#b8605c}
 .faq span{font-size:13.5px;line-height:1.5}
 .foot{width:min(1080px,100%);margin:0 auto;padding:0 var(--pad) 40px;font-family:var(--disp);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,246,232,.7);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 @media (max-width:820px){
