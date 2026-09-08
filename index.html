@@ -64,6 +64,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 .cat img{width:100%;height:100%;object-fit:contain;object-position:50% 100%;position:absolute;left:0;bottom:0;opacity:0;transition:opacity .08s}
 .cat img.on{opacity:1}
+.cat img.hit{width:178%;height:auto;bottom:4%;object-fit:unset}
+.cat.lunge{transform:translateX(7%) !important}
 .fx{position:absolute;inset:0;z-index:8;pointer-events:none}
 .mark{position:absolute;left:var(--pad);bottom:var(--pad);z-index:9;font-family:var(--disp);font-size:clamp(26px,4vw,54px);line-height:.95;color:var(--cream);-webkit-text-stroke:2px var(--ink);paint-order:stroke fill;text-shadow:5px 5px 0 var(--ink);pointer-events:none}
 .mark em{font-style:normal;color:var(--lime)}
@@ -109,7 +111,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   <div class="stage" id="stage">
     <div class="rope" id="rope"></div>
     <div class="pin" id="pin"><img class="on" src="assets/pin-0.webp" alt="" /><img src="assets/pin-1.webp" alt="" /><img src="assets/pin-2.webp" alt="" /></div>
-    <div class="cat" id="cat"><img class="on" src="assets/cat-idle.webp" alt="" /><img src="assets/cat-up.webp" alt="" /><img src="assets/cat-hit.webp" alt="" /></div>
+    <div class="cat" id="cat"><img class="on" src="assets/cat-idle.webp" alt="" /><img src="assets/cat-up.webp" alt="" /><img class="hit" src="assets/cat-hit.webp" alt="" /></div>
     <canvas class="fx" id="fx"></canvas>
   </div>
   <div class="scan"></div><div class="vig"></div>
@@ -190,7 +192,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   function pose(i){ cat.forEach(function(im, j){ im.classList.toggle('on', j === i); }); }
   function hit(){
     if(busy || done) return; busy = true;
-    pose(1); setTimeout(function(){ pose(2); }, 180);
+    pose(1); setTimeout(function(){ pose(2); document.getElementById('cat').classList.add('lunge'); }, 180);
     setTimeout(function(){
       hits++; dots.forEach(function(d, i){ d.classList.toggle('on', i < hits); });
       stage.classList.remove('shake'); void stage.offsetWidth; stage.classList.add('shake');
@@ -198,7 +200,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       if(hits < 3){ pinImgs.forEach(function(im, i){ im.classList.toggle('on', i === Math.min(1, hits)); }); confetti(60 + hits * 30, false); }
       else { pinImgs.forEach(function(im, i){ im.classList.toggle('on', i === 2); }); pin.classList.add('gone'); burst(); done = true; }
     }, 360);
-    setTimeout(function(){ pose(0); busy = false; }, 800);
+    setTimeout(function(){ pose(0); document.getElementById('cat').classList.remove('lunge'); busy = false; }, 800);
   }
   function reset(){ done = false; hits = 0; parts = []; g.clearRect(0, 0, fx.width, fx.height); dots.forEach(function(d){ d.classList.remove('on'); }); pinImgs.forEach(function(im, i){ im.classList.toggle('on', i === 0); }); pin.classList.remove('gone', 'hitL'); pin.classList.add('drop'); setTimeout(function(){ pin.classList.remove('drop'); }, 900); }
   var visible = true;
