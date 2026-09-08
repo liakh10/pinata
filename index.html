@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="config.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Pinata Cat</title>
+<meta name="description" content="Every legendary meme is inside the pinata, three hits and they are out" />
+<link rel="icon" type="image/png" href="assets/favicon.png" />
+<link rel="apple-touch-icon" href="assets/apple-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#4b2fd8; --bg-d:#2e1a99; --ink:#120a2a; --cream:#fff6e8; --green:#22c55e; --pink:#ff3d8a; --yellow:#ffd23f; --orange:#ff7a1a; --cyan:#3ddcff;
+  --disp:"Anton",Impact,sans-serif; --sans:"Inter",system-ui,sans-serif;
+  --pad:clamp(14px,2.6vw,36px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--bg);color:var(--cream);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,canvas{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+.chip{height:42px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:0 18px;border-radius:999px;font-family:var(--disp);font-size:15px;letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:var(--cream);transition:transform .12s,background .15s}
+.chip:hover{transform:translateY(-2px)}
+.chip:active{transform:translateY(1px)}
+.chip.buy{background:var(--green);color:var(--ink)}
+.chip.light{background:var(--cream);color:var(--ink)}
+.chip svg{width:15px;height:15px}
+.chip img{width:24px;height:24px;border-radius:50%}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+
+/* papel picado */
+.flags{position:absolute;left:-2%;right:-2%;top:0;height:64px;z-index:3;pointer-events:none;display:flex;justify-content:space-between;transform-origin:50% 0;animation:sway 6s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-.6deg)}50%{transform:rotate(.6deg)}}
+.flags::before{content:"";position:absolute;left:0;right:0;top:12px;height:2px;background:rgba(18,10,42,.6)}
+.flags i{width:52px;height:46px;margin-top:13px;background:var(--pink);clip-path:polygon(0 0,100% 0,100% 82%,88% 100%,76% 82%,64% 100%,52% 82%,40% 100%,28% 82%,16% 100%,4% 82%,0 100%);animation:flag 2.4s ease-in-out infinite;transform-origin:50% 0}
+.flags i:nth-child(4n+2){background:var(--yellow);animation-delay:.3s}
+.flags i:nth-child(4n+3){background:var(--cyan);animation-delay:.6s}
+.flags i:nth-child(4n+4){background:var(--orange);animation-delay:.9s}
+@keyframes flag{0%,100%{transform:skewX(0)}50%{transform:skewX(6deg)}}
+
+/* ================= HERO ================= */
+.hero{position:relative;min-height:100svh;overflow:hidden;padding:calc(var(--pad) + 70px) var(--pad) var(--pad);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);align-items:center;gap:var(--pad)}
+.top{position:absolute;left:var(--pad);right:var(--pad);top:calc(var(--pad) + 40px);z-index:9;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-size:18px;letter-spacing:.1em;text-transform:uppercase}
+.brand img{width:36px;height:36px;border-radius:50%;border:2px solid var(--ink)}
+.copy{position:relative;z-index:8}
+.copy h1{font-family:var(--disp);font-size:clamp(56px,8.6vw,132px);line-height:.9;letter-spacing:.01em;text-transform:uppercase;color:var(--cream);text-shadow:6px 6px 0 var(--ink)}
+.copy h1 em{font-style:normal;color:var(--yellow)}
+.copy p{margin-top:16px;font-size:clamp(15px,1.5vw,19px);font-weight:500;max-width:36ch;color:var(--cream)}
+.copy .btns{margin-top:22px}
+.count{display:inline-flex;align-items:center;gap:10px;margin-top:18px;font-family:var(--disp);font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--cream)}
+.count b{display:inline-flex;gap:5px}
+.count b i{width:14px;height:14px;border-radius:50%;background:rgba(18,10,42,.35);border:2px solid var(--ink)}
+.count b i.on{background:var(--yellow)}
+
+/* stage */
+.stage{position:relative;height:min(78svh,760px);min-height:460px;z-index:5}
+.stage.shake{animation:shake .4s ease}
+@keyframes shake{0%,100%{transform:translate(0,0)}20%{transform:translate(-8px,4px)}40%{transform:translate(8px,-4px)}60%{transform:translate(-5px,3px)}80%{transform:translate(5px,-2px)}}
+.rope{position:absolute;left:66%;top:-80px;width:4px;height:calc(18% + 80px);background:#c9a06a;transform-origin:50% 0;z-index:5}
+.pin{position:absolute;left:66%;top:-80px;width:min(46%,380px);transform-origin:50% 0;z-index:6;transition:transform .3s;transform:translateX(-50%)}
+.pin img{width:100%;position:absolute;left:0;top:calc(18% + 80px);opacity:0;transition:opacity .15s}
+.pin img.on{opacity:1}
+.pin{animation:pend 4.2s ease-in-out infinite}
+@keyframes pend{0%,100%{transform:translateX(-50%) rotate(-4deg)}50%{transform:translateX(-50%) rotate(4deg)}}
+.pin.hitL{animation:hitL .9s cubic-bezier(.2,1.4,.4,1)}
+@keyframes hitL{0%{transform:translateX(-50%) rotate(0)}25%{transform:translateX(-50%) rotate(34deg)}60%{transform:translateX(-50%) rotate(-14deg)}100%{transform:translateX(-50%) rotate(0)}}
+.pin.gone{animation:none;transform:translateX(-50%) rotate(0)}
+.pin.drop{animation:drop .9s cubic-bezier(.2,1.3,.4,1)}
+@keyframes drop{from{transform:translateX(-50%) translateY(-120%)}to{transform:translateX(-50%) translateY(0)}}
+.cat{position:absolute;left:0;bottom:2%;width:min(60%,520px);z-index:7}
+.cat img{width:100%;position:absolute;left:0;bottom:0;opacity:0;transition:opacity .08s}
+.cat img.on{opacity:1}
+.cat{animation:bob 3s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.floor{position:absolute;left:-10%;right:-10%;bottom:0;height:6px;background:rgba(18,10,42,.35);border-radius:50%;filter:blur(4px)}
+.fx{position:absolute;inset:0;z-index:8;pointer-events:none}
+
+/* ================= INSIDE ================= */
+.inside{padding:clamp(40px,6vw,80px) var(--pad);background:var(--bg-d)}
+.inside .h{font-family:var(--disp);font-size:clamp(36px,5vw,72px);line-height:.95;text-transform:uppercase;color:var(--cream);text-shadow:4px 4px 0 var(--ink);text-align:center}
+.inside .h em{font-style:normal;color:var(--yellow)}
+.inside .s{text-align:center;font-weight:500;margin-top:10px;margin-bottom:26px;color:var(--cream)}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;width:min(1180px,100%);margin:0 auto}
+.card{background:var(--cream);color:var(--ink);border-radius:20px;padding:14px 12px 14px;text-align:center;box-shadow:0 8px 0 var(--ink);transition:transform .2s}
+.card:hover{transform:translateY(-6px) rotate(-1.5deg)}
+.card img{width:70%;margin:0 auto 10px;aspect-ratio:1;object-fit:contain}
+.card b{display:block;font-family:var(--disp);font-size:18px;letter-spacing:.06em;text-transform:uppercase}
+.card span{display:block;font-size:12.5px;font-weight:500;color:#4a3f6b;margin-top:3px;white-space:pre-line;line-height:1.35}
+
+/* ================= TICKET ================= */
+.ticket{padding:clamp(40px,6vw,80px) var(--pad) clamp(50px,7vw,90px);display:grid;justify-items:center;gap:18px}
+.wrap{width:min(600px,100%);background:var(--cream);color:var(--ink);border-radius:24px;padding:clamp(18px,3vw,28px);display:grid;gap:14px;justify-items:center;text-align:center;box-shadow:0 10px 0 var(--ink)}
+.wrap .l{font-family:var(--disp);font-size:16px;letter-spacing:.2em;text-transform:uppercase;color:#4a3f6b}
+.ca{display:grid;justify-items:center;gap:8px;width:100%;padding:14px 16px;border-radius:16px;background:var(--ink);color:var(--cream);cursor:pointer}
+.ca .tag{font-family:var(--disp);font-size:12px;letter-spacing:.3em;color:var(--yellow)}
+.ca .ca-val{font-family:var(--disp);font-size:28px;letter-spacing:.08em;color:var(--cream);white-space:nowrap;max-width:100%;line-height:1.1}
+.ca.live .ca-val{font-family:var(--sans);font-weight:600;font-size:clamp(11px,2.9vw,16px);letter-spacing:0;color:var(--green)}
+.ca .cp{font-family:var(--disp);font-size:12px;letter-spacing:.16em;color:var(--cream);padding:6px 14px;border-radius:999px;border:2px dashed rgba(255,246,232,.45)}
+.ca.live{box-shadow:0 0 0 3px var(--green)}
+.ca.live .cp{border-style:solid;border-color:var(--green);color:var(--green)}
+.wrap .btns{justify-content:center}
+.end{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;width:min(1180px,100%);font-family:var(--disp);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,246,232,.7)}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;padding-top:calc(var(--pad) + 96px);gap:8px;align-items:start}
+  .copy{text-align:center}
+  .copy p{margin-left:auto;margin-right:auto}
+  .copy .btns{justify-content:center}
+  .copy h1{font-size:clamp(52px,15vw,84px)}
+  .stage{height:min(58svh,520px);min-height:380px}
+  .pin{width:min(52%,300px);left:68%}
+  .rope{left:68%}
+  .cat{width:min(64%,380px)}
+  .top .chip span{display:none}
+  .top .chip{padding:0 13px}
+  .brand span{display:none}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .ca .ca-val{font-size:22px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+</style>
+</head>
+<body>
+
+<section class="hero" id="hero">
+  <div class="flags" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="top">
+    <a class="brand" href="/"><img src="assets/avatar.webp" alt="" /><span data-name>Pinata Cat</span></a>
+    <nav class="btns">
+      <a class="chip buy" data-link="pons" href="https://www.ponsfamily.com/launchpad"><span>Buy</span><svg><use href="#i-pons"/></svg></a>
+      <a class="chip" data-link="x" href="https://x.com" aria-label="X"><svg><use href="#i-x"/></svg></a>
+      <a class="chip light" href="/docs"><span>Docs</span></a>
+    </nav>
+  </div>
+
+  <div class="copy">
+    <h1 id="h1">HIT THE<br /><em>PIÑATA</em></h1>
+    <p id="lead">Every legendary meme is inside, three hits and they are all out</p>
+    <div class="btns"><a class="chip buy" data-link="pons" href="https://www.ponsfamily.com/launchpad">Buy on Pons<svg><use href="#i-pons"/></svg></a><a class="chip light" href="#inside">Who is inside</a></div>
+    <div class="count">Hits <b id="dots"><i></i><i></i><i></i></b><span id="out"></span></div>
+  </div>
+
+  <div class="stage" id="stage">
+    <div class="rope" id="rope"></div>
+    <div class="pin" id="pin"><img class="on" src="assets/pinata-0.webp" alt="" /><img src="assets/pinata-1.webp" alt="" /><img src="assets/pinata-2.webp" alt="" /></div>
+    <div class="cat" id="cat"><img class="on" src="assets/cat-idle.webp" alt="" /><img src="assets/cat-up.webp" alt="" /><img src="assets/cat-hit.webp" alt="" /></div>
+    <div class="floor"></div>
+    <canvas class="fx" id="fx"></canvas>
+  </div>
+</section>
+
+<section class="inside" id="inside">
+  <h2 class="h">WHO WAS <em>INSIDE</em></h2>
+  <p class="s">Ten of them, all paper, all legendary, none of them asked to be in there</p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="ticket" id="ticket">
+  <div class="wrap">
+    <div class="l">The wrapper</div>
+    <div class="ca" id="ca"><span class="tag">CONTRACT</span><b class="ca-val" id="caVal">soon</b><button class="cp" id="caCopy">[ COPY ]</button></div>
+    <div class="btns">
+      <a class="chip buy" data-link="pons" href="https://www.ponsfamily.com/launchpad">Buy on Pons<svg><use href="#i-pons"/></svg></a>
+      <a class="chip" data-link="x" href="https://x.com" aria-label="X"><svg><use href="#i-x"/></svg></a>
+      <a class="chip light" href="/docs">Docs</a>
+    </div>
+  </div>
+  <div class="end"><span data-name>Pinata Cat</span><span>Robinhood Chain · Pons · three hits</span></div>
+</section>
+
+<audio id="bgm" src="assets/music.mp3" loop preload="none"></audio>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pons" viewBox="0 0 64 64"><path d="M14 8h24c11 0 18 7 18 17s-7 17-18 17h-9v12a3 3 0 0 1-3 3H17a3 3 0 0 1-3-3V11a3 3 0 0 1 3-3z" fill="currentColor"/><path d="M29 20h8c4 0 6.5 2 6.5 5s-2.5 5-6.5 5h-8z" fill="#fff" opacity=".9"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path fill="currentColor" d="M18.9 2H22l-7.1 8.1L23 22h-6.6l-5.2-6.8L5.3 22H2.1l7.6-8.7L1.5 2h6.7l4.7 6.2L18.9 2zm-1.1 18h1.8L7.3 3.9H5.4L17.8 20z"/></symbol>
+</svg>
+
+<script>
+(function(){
+  var S = window.SITE, CA = (S.CA||"SOON").trim(), HAS_CA = CA !== "SOON" && CA !== "";
+  document.querySelectorAll('[data-name]').forEach(function(e){ e.textContent = S.NAME; });
+  document.title = S.NAME;
+  document.querySelectorAll('[data-link="pons"]').forEach(function(a){ a.href = HAS_CA ? window.PONS_HOME + '/' + CA : window.PONS_HOME; a.target='_blank'; a.rel='noopener'; });
+  document.querySelectorAll('[data-link="x"]').forEach(function(a){ a.href = S.X_URL || 'https://x.com'; a.target='_blank'; a.rel='noopener'; });
+  var caBox = document.getElementById('ca'), caVal = document.getElementById('caVal'), caCopy = document.getElementById('caCopy');
+  caVal.textContent = HAS_CA ? CA : 'soon';
+  if(HAS_CA){ caBox.classList.add('live'); caBox.title = CA; }
+  caBox.addEventListener('click', function(){ var old = caCopy.textContent; if(HAS_CA){ if(navigator.clipboard) navigator.clipboard.writeText(CA); caCopy.textContent = '[ COPIED ]'; } else { caCopy.textContent = '[ NOT YET ]'; } setTimeout(function(){ caCopy.textContent = old; }, 1400); });
+
+  var bgm = document.getElementById('bgm'), armed = false, hasMusic = true;
+  bgm.addEventListener('error', function(){ hasMusic = false; });
+  function arm(){ if(armed) return; armed = true; if(hasMusic){ bgm.volume = .3; bgm.play().catch(function(){}); } }
+  document.addEventListener('pointerdown', arm, true); document.addEventListener('keydown', arm, true);
+
+  /* ---- the memes ---- */
+  var memes = [
+    ['doge', 'Doge', 'Much inside\nVery out now'], ['pepe', 'Pepe', 'Feels good to be out\nFor about a minute'], ['wojak', 'Wojak', 'Was already sad in there'], ['troll', 'Trollface', 'Problem?'],
+    ['cheems', 'Cheems', 'Did not want to be hit\nWas hit'], ['chad', 'Gigachad', 'Took the hit\nDid not move'], ['grumpy', 'Grumpy Cat', 'No'], ['nyan', 'Nyan Cat', 'Left a rainbow on the way out'],
+    ['stonks', 'Stonks', 'Came out up\nWent down after'], ['amogus', 'Amogus', 'Was sus in there\nStill sus']
+  ];
+  var grid = document.getElementById('grid'), imgs = {};
+  memes.forEach(function(m){ var c = document.createElement('div'); c.className = 'card'; c.innerHTML = '<img src="assets/m-' + m[0] + '.webp" alt="" /><b>' + m[1] + '</b><span>' + m[2] + '</span>'; grid.appendChild(c); var im = new Image(); im.src = 'assets/m-' + m[0] + '.webp'; imgs[m[0]] = im; });
+
+  /* ---- fx canvas ---- */
+  var stage = document.getElementById('stage'), fx = document.getElementById('fx'), g = fx.getContext('2d'), parts = [], raf = null;
+  function size(){ fx.width = stage.clientWidth * devicePixelRatio; fx.height = stage.clientHeight * devicePixelRatio; g.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0); }
+  size(); addEventListener('resize', size);
+  var cols = ['#ff3d8a', '#ffd23f', '#3ddcff', '#ff7a1a', '#22c55e', '#fff6e8'];
+  function pinPoint(){ var r = document.getElementById('pin').getBoundingClientRect(), s = stage.getBoundingClientRect(); return { x: r.left - s.left + r.width / 2, y: r.top - s.top + r.height * .55 }; }
+  function confetti(n, big){ var p = pinPoint(); for(var i = 0; i < n; i++) parts.push({ t: 'c', x: p.x, y: p.y, vx: (Math.random() - .5) * (big ? 26 : 14), vy: -Math.random() * (big ? 18 : 10) - 2, g: .35, w: 5 + Math.random() * 7, h: 7 + Math.random() * 9, a: Math.random() * 6, va: (Math.random() - .5) * .4, c: cols[i % cols.length], life: 110 + Math.random() * 60 }); loop(); }
+  function burst(){ var p = pinPoint(), W = stage.clientWidth, sz = Math.min(150, Math.max(84, W * .16)); memes.forEach(function(m, i){ var ang = -Math.PI / 2 + (i - 4.5) / 4.5 * 1.1; var sp = 13 + Math.random() * 7; parts.push({ t: 'm', img: imgs[m[0]], x: p.x, y: p.y, vx: Math.cos(ang) * sp + (Math.random() - .5) * 4, vy: Math.sin(ang) * sp - 4, g: .5, s: sz, a: 0, va: (Math.random() - .5) * .3, rest: 0 }); }); confetti(220, true); loop(); }
+  function loop(){ if(raf) return; raf = requestAnimationFrame(step); }
+  function step(){
+    var W = stage.clientWidth, H = stage.clientHeight; g.clearRect(0, 0, W, H); var alive = 0;
+    parts.forEach(function(p){
+      if(p.t === 'c'){ p.life--; if(p.life <= 0) return; alive++; p.vy += p.g; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.a += p.va; if(p.y > H + 20) p.life = 0; g.save(); g.translate(p.x, p.y); g.rotate(p.a); g.globalAlpha = Math.min(1, p.life / 40); g.fillStyle = p.c; g.fillRect(-p.w / 2, -p.h / 2, p.w, p.h); g.restore(); }
+      else { var floor = H - 10 - p.s / 2; if(p.rest < 3){ alive++; p.vy += p.g; p.x += p.vx; p.y += p.vy; p.a += p.va; if(p.y > floor){ p.y = floor; p.vy = -p.vy * .45; p.vx *= .8; p.va *= .6; if(Math.abs(p.vy) < 1.2){ p.vy = 0; p.rest++; } } if(p.x < p.s / 2){ p.x = p.s / 2; p.vx = -p.vx * .6; } if(p.x > W - p.s / 2){ p.x = W - p.s / 2; p.vx = -p.vx * .6; } } g.save(); g.translate(p.x, p.y); g.rotate(p.a); if(p.img.complete) g.drawImage(p.img, -p.s / 2, -p.s / 2, p.s, p.s); g.restore(); }
+    });
+    parts = parts.filter(function(p){ return p.t === 'm' || p.life > 0; });
+    if(alive){ raf = requestAnimationFrame(step); } else raf = null;
+  }
+
+  /* ---- hits ---- */
+  var cat = [].slice.call(document.querySelectorAll('#cat img')), pinImgs = [].slice.call(document.querySelectorAll('#pin img')), pin = document.getElementById('pin'), dots = [].slice.call(document.querySelectorAll('#dots i')), h1 = document.getElementById('h1'), lead = document.getElementById('lead'), out = document.getElementById('out'), hits = 0, busy = false, done = false;
+  function pose(i){ cat.forEach(function(im, j){ im.classList.toggle('on', j === i); }); }
+  function hit(){
+    if(busy || done) return; busy = true;
+    pose(1); setTimeout(function(){ pose(2); }, 160);
+    setTimeout(function(){
+      hits++; dots.forEach(function(d, i){ d.classList.toggle('on', i < hits); });
+      stage.classList.remove('shake'); void stage.offsetWidth; stage.classList.add('shake');
+      pin.classList.remove('hitL'); void pin.offsetWidth; pin.classList.add('hitL');
+      if(hits < 3){ pinImgs.forEach(function(im, i){ im.classList.toggle('on', i === Math.min(1, hits)); }); confetti(60 + hits * 30, false); h1.innerHTML = hits === 1 ? 'ONE MORE<br /><em>TIME</em>' : 'IT IS<br /><em>CRACKING</em>'; lead.textContent = hits === 1 ? 'It moved, something moved inside too' : 'You can hear them in there'; }
+      else { pinImgs.forEach(function(im, i){ im.classList.toggle('on', i === 2); }); pin.classList.add('gone'); burst(); done = true; h1.innerHTML = 'THEY ARE<br /><em>ALL OUT</em>'; lead.textContent = 'Ten memes on the floor, the piñata is empty, hang a new one'; out.textContent = '10 memes out'; }
+    }, 330);
+    setTimeout(function(){ pose(0); busy = false; }, 760);
+  }
+  function reset(){ done = false; hits = 0; parts = []; g.clearRect(0, 0, fx.width, fx.height); dots.forEach(function(d){ d.classList.remove('on'); }); pinImgs.forEach(function(im, i){ im.classList.toggle('on', i === 0); }); pin.classList.remove('gone', 'hitL'); h1.innerHTML = 'HIT THE<br /><em>PIÑATA</em>'; lead.textContent = 'Every legendary meme is inside, three hits and they are all out'; out.textContent = ''; pin.classList.add('drop'); setTimeout(function(){ pin.classList.remove('drop'); }, 900); }
+  /* autoplay: the cat swings on its own, forever */
+  var visible = true;
+  if('IntersectionObserver' in window){ new IntersectionObserver(function(en){ visible = en[0].isIntersecting; }, { threshold: .2 }).observe(stage); }
+  function cycle(){ if(!visible){ setTimeout(cycle, 800); return; } if(done){ reset(); setTimeout(cycle, 2200); return; } hit(); setTimeout(cycle, hits >= 3 ? 5200 : 1900); }
+  setTimeout(cycle, 1600);
+  window.__pc = { hit: hit, reset: reset, hits: function(){ return hits; } };
+})();
+</script>
+</body>
+</html>

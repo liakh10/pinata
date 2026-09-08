@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="config.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pinata Cat Docs</title>
+<meta name="description" content="Field manual for Pinata Cat, every legendary meme is inside" />
+<link rel="icon" type="image/png" href="assets/favicon.png" />
+<link rel="apple-touch-icon" href="assets/apple-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{--bg:#4b2fd8;--bg-d:#2e1a99;--ink:#120a2a;--cream:#fff6e8;--green:#22c55e;--pink:#ff3d8a;--yellow:#ffd23f;--line:rgba(255,246,232,.18);
+  --disp:"Anton",Impact,sans-serif;--type:"Inter",system-ui,sans-serif;--pad:clamp(16px,3vw,40px)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{background:var(--bg);color:var(--cream);font-family:var(--type);font-size:14.5px;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.top{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px var(--pad);background:rgba(75,47,216,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-size:16px;letter-spacing:.1em;text-transform:uppercase}
+.brand img{width:30px;height:30px;border-radius:50%;border:2px solid var(--ink)}
+.brand small{font-family:var(--type);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,246,232,.7);font-weight:500}
+.top nav{display:flex;gap:6px}
+.btn{height:36px;display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:0 15px;font-family:var(--disp);font-size:13px;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;background:var(--ink);color:var(--cream)}
+.btn svg{width:13px;height:13px}
+.btn.buy{background:var(--green);color:var(--ink)}
+.btn.crumb{background:var(--cream);color:var(--ink)}
+.shell{display:grid;grid-template-columns:230px minmax(0,1fr);gap:clamp(20px,4vw,56px);width:min(1080px,100%);margin:0 auto;padding:34px var(--pad) 80px;min-width:0}
+.side{position:sticky;top:78px;align-self:start;display:flex;flex-direction:column;gap:2px}
+.kick{font-family:var(--disp);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow);margin-bottom:10px}
+.side a{font-size:13.5px;font-weight:500;padding:6px 12px;color:rgba(255,246,232,.7);border-radius:999px}
+.side a:hover{color:var(--cream)}
+.side a.on{color:var(--ink);background:var(--cream)}
+.hero{margin-bottom:24px}
+.hero h1{font-family:var(--disp);font-size:clamp(34px,5.2vw,60px);line-height:.95;letter-spacing:.02em;text-transform:uppercase;text-shadow:4px 4px 0 var(--ink)}
+.hero h1 em{font-style:normal;color:var(--yellow)}
+.hero p{margin-top:12px;font-size:15px;font-weight:500;line-height:1.5;max-width:60ch;white-space:pre-line}
+.sec{background:var(--cream);color:var(--ink);padding:clamp(16px,2.6vw,26px);margin-bottom:16px;border-radius:20px;box-shadow:0 8px 0 var(--ink)}
+.sec h2{font-family:var(--disp);font-size:clamp(20px,2.4vw,28px);line-height:1.1;letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px}
+.sec h2 i{font-style:normal;font-family:var(--type);font-weight:600;font-size:10px;letter-spacing:.24em;color:#7c3aed;display:block;margin-bottom:6px}
+.sec p{font-size:14.5px;line-height:1.6;max-width:68ch}
+.sec p + p{margin-top:8px}
+.rows{display:grid;margin-top:12px;border-top:2px solid var(--ink)}
+.row{display:grid;grid-template-columns:160px 1fr;gap:12px;padding:9px 0;border-bottom:1px solid #d8cfe8;font-size:13.5px;line-height:1.5}
+.row dt{font-family:var(--disp);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#7c3aed;padding-top:4px}
+.tree{margin-top:12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;line-height:1.6;white-space:pre;overflow-x:auto;padding:12px 14px;background:var(--ink);color:var(--cream);border-radius:12px}
+.tree b{color:var(--yellow);font-weight:600}
+.kbd{display:inline-block;font-family:var(--disp);font-size:11px;padding:2px 7px;border-radius:6px;background:var(--ink);color:var(--cream);margin:0 2px}
+.ca{display:grid;justify-items:center;gap:6px;max-width:100%;padding:12px 14px;margin-top:12px;border-radius:14px;background:var(--ink);color:var(--cream);cursor:pointer}
+.ca small{font-family:var(--disp);font-size:11px;letter-spacing:.24em;color:var(--yellow);white-space:nowrap}
+.ca b{font-family:var(--disp);font-size:22px;white-space:nowrap;max-width:100%;color:var(--cream);letter-spacing:.06em}
+.ca.live b{font-family:var(--type);font-weight:600;font-size:clamp(10.5px,2.7vw,14px);letter-spacing:0;color:var(--green)}
+.ca .copy{display:inline-block;font:inherit;font-family:var(--disp);font-size:11px;letter-spacing:.14em;padding:5px 11px;border-radius:999px;background:transparent;color:var(--cream);border:2px dashed rgba(255,246,232,.45);cursor:pointer}
+.ca.live{box-shadow:0 0 0 3px var(--green)}
+.ca.live .copy{border-style:solid;border-color:var(--green);color:var(--green)}
+.links{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.faq{display:grid;gap:8px;margin-top:10px}
+.faq div{padding:10px 14px;background:#efe9ff;border-radius:12px}
+.faq b{font-family:var(--disp);font-size:15px;letter-spacing:.04em;text-transform:uppercase;display:block;margin-bottom:3px;color:#7c3aed}
+.faq span{font-size:13.5px;line-height:1.5}
+.foot{width:min(1080px,100%);margin:0 auto;padding:0 var(--pad) 40px;font-family:var(--disp);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,246,232,.7);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+@media (max-width:820px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:16px;padding-top:18px}
+  main{min-width:0}
+  .side{position:static;flex-direction:row;overflow-x:auto;gap:4px;padding-bottom:6px;scrollbar-width:none;max-width:100%}
+  .side .kick{display:none}
+  .side a{white-space:nowrap;font-size:12.5px;padding:5px 10px;background:rgba(18,10,42,.35);color:var(--cream)}
+  .side a.on{background:var(--cream);color:var(--ink)}
+  .row{grid-template-columns:1fr;gap:3px}
+  .top nav .btn span{display:none}
+  .brand span{display:none}
+  .ca{width:100%}
+}
+.btn[data-link="x"] svg{width:16px;height:16px}
+</style>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="/"><img src="assets/favicon.png" alt="" /><span data-name>Pinata Cat</span><small>docs</small></a>
+  <nav>
+    <a class="btn" href="/"><span>The piñata</span></a>
+    <a class="btn buy" data-link="pons" href="https://www.ponsfamily.com/launchpad"><span>Buy</span><svg><use href="#i-pons"/></svg></a>
+    <a class="btn" data-link="x" href="https://x.com" aria-label="X"><svg><use href="#i-x"/></svg></a>
+    <span class="btn crumb">Docs</span>
+  </nav>
+</header>
+
+<div class="shell">
+  <aside class="side">
+    <span class="kick">Party rules</span>
+    <a href="#what" class="on">What is this</a>
+    <a href="#inside">Who is inside</a>
+    <a href="#hits">The three hits</a>
+    <a href="#site">Using the site</a>
+    <a href="#token">Token</a>
+    <a href="#local">Nothing is stored</a>
+    <a href="#faq">FAQ</a>
+  </aside>
+
+  <main>
+    <div class="hero">
+      <h1><em>Pinata Cat</em>, party rules</h1>
+      <p>One cat, one stick, one piñata
+Everything else is inside it</p>
+    </div>
+
+    <section id="what" class="sec">
+      <h2><i>01 · OVERVIEW</i>What is <span data-name>Pinata Cat</span></h2>
+      <p>A blindfolded orange cat with a striped stick and a green star piñata on a rope. Inside the piñata are ten legendary memes, cut out of paper. Three hits and they all fall out onto the floor. Then you hang a new one.</p>
+      <p>The cat is a photo, the piñata is a photo, the memes are paper cut-outs, the background is one flat colour. That is the whole look.</p>
+      <div class="rows">
+        <dl class="row"><dt>Character</dt><dd>A chunky orange tabby standing on two legs, red bandana over the eyes, white sneakers, never misses anyway</dd></dl>
+        <dl class="row"><dt>The piñata</dt><dd>A classic seven-point star in green tissue paper, the Robinhood colour, with magenta and orange tips</dd></dl>
+        <dl class="row"><dt>The format</dt><dd>One hero scene you hit with a button, then the paper memes on cards, then the wrapper with the contract</dd></dl>
+        <dl class="row"><dt>Chain</dt><dd>Robinhood Chain, token through the Pons launchpad</dd></dl>
+      </div>
+    </section>
+
+    <section id="inside" class="sec">
+      <h2><i>02 · MANIFEST</i>Who is inside</h2>
+      <div class="tree"><b>ten memes, paper</b>
+├── Doge          much inside, very out now
+├── Pepe          feels good to be out, for about a minute
+├── Wojak         was already sad in there
+├── Trollface     problem?
+├── Cheems        did not want to be hit, was hit
+├── Gigachad      took the hit, did not move
+├── Grumpy Cat    no
+├── Nyan Cat      left a rainbow on the way out
+├── Stonks        came out up, went down after
+└── Amogus        was sus in there, still sus</div>
+    </section>
+
+    <section id="hits" class="sec">
+      <h2><i>03 · THE SWING</i>The three hits</h2>
+      <div class="tree"><b>hits</b>
+├── one     the piñata swings, confetti, something moved inside
+├── two     a crack, candy showing, you can hear them
+└── three   it bursts, ten memes fly out with physics and land on the floor, the top half stays on the rope</div>
+      <p>After the third hit the button says hang a new one. It puts a fresh piñata on the rope and the floor is clean again.</p>
+    </section>
+
+    <section id="site" class="sec">
+      <h2><i>04 · CONTROLS</i>Using the site</h2>
+      <div class="rows">
+        <dl class="row"><dt>Hit</dt><dd>The pink HIT IT button, a click on the piñata itself, or <span class="kbd">Space</span> and <span class="kbd">Enter</span>. The cat winds up, swings, the screen shakes</dd></dl>
+        <dl class="row"><dt>Counter</dt><dd>Three dots under the headline fill in with each hit</dd></dl>
+        <dl class="row"><dt>Sound</dt><dd>Quiet until you tap. Your first click anywhere starts a short party loop</dd></dl>
+        <dl class="row"><dt>Below</dt><dd>The ten memes on paper cards, then the wrapper with the contract, BUY, X and this page</dd></dl>
+      </div>
+    </section>
+
+    <section id="token" class="sec">
+      <h2><i>05 · TOKEN</i>Token</h2>
+      <p>The token launches on Robinhood Chain through the Pons launchpad. The contract goes onto the wrapper at the bottom of the main page and here. Until then both say soon and the copy button says not yet.</p>
+      <div class="ca" id="ca"><small>CONTRACT</small><b id="caVal">soon</b><button class="copy" id="caCopy">COPY</button></div>
+      <div class="links">
+        <a class="btn buy" data-link="pons" href="https://www.ponsfamily.com/launchpad">Buy on Pons<svg><use href="#i-pons"/></svg></a>
+        <a class="btn" data-link="x" href="https://x.com" aria-label="X"><svg><use href="#i-x"/></svg></a>
+      </div>
+      <div class="rows">
+        <dl class="row"><dt>Chain</dt><dd>Robinhood Chain, EVM, addresses start with 0x</dd></dl>
+        <dl class="row"><dt>Launchpad</dt><dd>Pons, ponsfamily.com. Buy opens the launchpad, and the token page once the address is in</dd></dl>
+        <dl class="row"><dt>Chart</dt><dd>DexScreener on Robinhood Chain once the token is live</dd></dl>
+      </div>
+    </section>
+
+    <section id="local" class="sec">
+      <h2><i>06 · PRIVACY</i>Nothing is stored</h2>
+      <p>No backend, no account, no cookies, nothing written to your browser. The hits are counted in the page and forgotten when you leave, the memes are pictures, the confetti is a canvas.</p>
+      <div class="rows">
+        <dl class="row"><dt>Music</dt><dd>One CC0 party loop from OpenGameArt, plays after your first tap</dd></dl>
+        <dl class="row"><dt>Reduced motion</dt><dd>If your system asks for it, the swinging, the bobbing and the shake stop, the hits still count</dd></dl>
+        <dl class="row"><dt>Affiliation</dt><dd>None. Not the memes' authors, not a party supply store, not the cat's owner</dd></dl>
+      </div>
+    </section>
+
+    <section id="faq" class="sec">
+      <h2><i>07 · FAQ</i>Questions</h2>
+      <div class="faq">
+        <div><b>Why is the cat blindfolded</b><span>Piñata rules. It hits anyway, every time, it is a cat</span></div>
+        <div><b>Why is the piñata green</b><span>Same green as the app that started all this. It cracks the same way too</span></div>
+        <div><b>Why paper memes</b><span>Everything that comes out of a piñata is paper for a while. They will be fine</span></div>
+        <div><b>Can I hit it more than three times</b><span>After three it is empty. Hang a new one, it is free</span></div>
+        <div><b>What happens at launch</b><span>The contract goes onto the wrapper, the buy button starts pointing at the token page, the cat keeps swinging</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer class="foot"><span data-name>Pinata Cat</span><span>Robinhood Chain · Pons · three hits</span></footer>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pons" viewBox="0 0 64 64"><path d="M14 8h24c11 0 18 7 18 17s-7 17-18 17h-9v12a3 3 0 0 1-3 3H17a3 3 0 0 1-3-3V11a3 3 0 0 1 3-3z" fill="currentColor"/><path d="M29 20h8c4 0 6.5 2 6.5 5s-2.5 5-6.5 5h-8z" fill="#fff" opacity=".9"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path fill="currentColor" d="M18.9 2H22l-7.1 8.1L23 22h-6.6l-5.2-6.8L5.3 22H2.1l7.6-8.7L1.5 2h6.7l4.7 6.2L18.9 2zm-1.1 18h1.8L7.3 3.9H5.4L17.8 20z"/></symbol>
+</svg>
+
+<script>
+(function(){
+  var S = window.SITE, CA = (S.CA||"SOON").trim(), HAS_CA = CA !== "SOON" && CA !== "";
+  document.querySelectorAll('[data-name]').forEach(function(e){ e.textContent = S.NAME; });
+  document.title = S.NAME + ' Docs';
+  document.querySelectorAll('[data-link="pons"]').forEach(function(a){ a.href = HAS_CA ? window.PONS_HOME + '/' + CA : window.PONS_HOME; a.target='_blank'; a.rel='noopener'; });
+  document.querySelectorAll('[data-link="x"]').forEach(function(a){ a.href = S.X_URL || 'https://x.com'; a.target='_blank'; a.rel='noopener'; });
+  var caBox = document.getElementById('ca'), caVal = document.getElementById('caVal'), caCopy = document.getElementById('caCopy');
+  caVal.textContent = HAS_CA ? CA : 'soon';
+  if(HAS_CA){ caBox.classList.add('live'); caBox.title = CA; }
+  caBox.addEventListener('click', function(){ var old = caCopy.textContent; if(HAS_CA){ if(navigator.clipboard) navigator.clipboard.writeText(CA); caCopy.textContent = 'COPIED'; } else { caCopy.textContent = 'NOT YET'; } setTimeout(function(){ caCopy.textContent = old; }, 1100); });
+  var links = [].slice.call(document.querySelectorAll('.side a')), secs = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  function spy(){ var y = window.scrollY + 120, cur = 0; secs.forEach(function(s, i){ if(s && s.offsetTop <= y) cur = i; }); links.forEach(function(a, i){ a.classList.toggle('on', i === cur); }); }
+  addEventListener('scroll', spy, { passive: true }); spy();
+})();
+</script>
+</body>
+</html>
